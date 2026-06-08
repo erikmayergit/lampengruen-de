@@ -51,7 +51,7 @@
      subscribes via the beehiiv API server-side. No beehiiv iframe, no Turnstile;
      data only leaves the browser when the visitor actually submits. ---- */
   var SUBSCRIBE_URL='https://ugjlbeekpbaaylavwgai.supabase.co/functions/v1/subscribe';
-  var SUCCESS='Du bist dabei 🌱 Wir sagen dir als Erstes Bescheid, sobald wir produzieren :)';
+  var SUCCESS='Fast geschafft 🌱 Bestätige kurz die E-Mail in deinem Postfach — dann sagen wir dir als Erstes Bescheid, sobald wir produzieren :)';
   var valid=function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);};
   document.querySelectorAll('form.wl-form,form.js-wl').forEach(function(form){
     var input=form.querySelector('input[type="email"]');
