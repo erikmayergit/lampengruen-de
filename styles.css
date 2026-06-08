@@ -417,13 +417,8 @@ section{position:relative}
 .wl-trust{margin-top:2.4rem;display:flex;gap:clamp(16px,4vw,40px);justify-content:center;flex-wrap:wrap;font-size:.85rem;color:#9fb0a0}
 .wl-trust span{display:flex;align-items:center;gap:.5em}
 @media(max-width:520px){.wl-form{flex-direction:column}}
-/* waitlist -> beehiiv embed (lazy-load placeholder) */
-.wl-embed{margin:2.4rem auto 0;max-width:480px;cursor:pointer}
-.wl-embed-fake{display:flex;gap:10px}
-.wl-embed-input{flex:1;display:flex;align-items:center;background:rgba(127,127,127,.08);border:1px solid rgba(127,127,127,.32);color:inherit;opacity:.55;padding:.95em 1.2em;border-radius:var(--btn-r);font-size:1rem}
-.wl-embed .btn-sun{white-space:nowrap}
-.wl-embed.loaded{cursor:default}
-@media(max-width:520px){.wl-embed-fake{flex-direction:column}}
+/* waitlist success message (replaces the form on submit) */
+.wl-success{color:inherit;font-size:1.05rem;line-height:1.6;max-width:480px;margin:0 auto;padding:.3rem 0;font-weight:500}
 /* footer legal links */
 .foot-legal{display:inline-flex;gap:.5em;flex-wrap:wrap}
 .foot-legal a{color:inherit;opacity:.85;text-decoration:none}

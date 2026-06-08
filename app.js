@@ -46,36 +46,50 @@
     },{passive:true});
   }
 
-  /* ---- waitlist forms -> beehiiv embed (lazy-loaded on interaction, DSGVO-clean) ----
-     Each native .wl-form / .js-wl is swapped for a styled placeholder. beehiiv's
-     loader script is injected ONLY when the visitor actually interacts, so no data
-     is sent to beehiiv (US) on page load. ---- */
-  var BH_FORM='4a433496-2e24-47be-8909-2b1e87341aa7';
-  var BH_SRC='https://subscribe-forms.beehiiv.com/v3/loader.js';
+  /* ---- waitlist forms -> native submit to Supabase Edge Function (beehiiv) ----
+     The site's own styled form posts the email to our EU edge function, which
+     subscribes via the beehiiv API server-side. No beehiiv iframe, no Turnstile;
+     data only leaves the browser when the visitor actually submits. ---- */
+  var SUBSCRIBE_URL='https://ugjlbeekpbaaylavwgai.supabase.co/functions/v1/subscribe';
+  var SUCCESS='Fast geschafft 🌱 Wir haben dir eine Bestätigungs-Mail geschickt — klick kurz auf den Link darin, dann sagen wir dir als Erstes Bescheid, sobald die nächste Charge öffnet.';
+  var valid=function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);};
   document.querySelectorAll('form.wl-form,form.js-wl').forEach(function(form){
-    var wrap=document.createElement('div');
-    wrap.className='wl-embed';
-    wrap.setAttribute('role','button');
-    wrap.setAttribute('tabindex','0');
-    wrap.setAttribute('aria-label','Warteliste-Anmeldung öffnen');
-    wrap.innerHTML='<div class="wl-embed-fake"><span class="wl-embed-input">deine@email.de</span><span class="btn btn-sun">SAG MIR BESCHEID<span class="arr">→</span></span></div>';
-    var loaded=false;
-    function load(){
-      if(loaded)return;loaded=true;
-      wrap.classList.add('loaded');
-      wrap.innerHTML='';
-      var s=document.createElement('script');
-      s.async=true;s.src=BH_SRC;s.setAttribute('data-beehiiv-form',BH_FORM);
-      wrap.appendChild(s);
-    }
-    wrap.addEventListener('click',load);
-    wrap.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();load();}});
-    if(form.parentNode)form.parentNode.replaceChild(wrap,form);
+    var input=form.querySelector('input[type="email"]');
+    var btn=form.querySelector('button[type="submit"]')||form.querySelector('button');
+    if(btn)btn.innerHTML='SAG MIR BESCHEID<span class="arr">→</span>';
+    var note=form.parentNode.querySelector('.wl-note')||form.querySelector('.wl-note');
+    /* honeypot: hidden field; bots fill it, humans never see it */
+    var hp=document.createElement('input');
+    hp.type='text';hp.name='company';hp.tabIndex=-1;hp.setAttribute('autocomplete','off');hp.setAttribute('aria-hidden','true');
+    hp.style.cssText='position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none';
+    form.appendChild(hp);
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!input)return;
+      var email=input.value.trim();
+      if(note){note.className=note.className.replace(/\b(ok|err)\b/g,'').trim();}
+      if(hp.value)return; /* bot filled honeypot -> silently drop */
+      if(!valid(email)){
+        input.classList.add('err');
+        if(note){note.textContent='Bitte gib eine gültige E-Mail ein.';note.classList.add('err');}
+        return;
+      }
+      input.classList.remove('err');
+      if(btn)btn.disabled=true;
+      if(note){note.textContent='Einen Moment …';}
+      fetch(SUBSCRIBE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
+        .then(function(r){return r.ok?r.json():Promise.reject(r);})
+        .then(function(){form.innerHTML='<p class="wl-success">'+SUCCESS+'</p>';})
+        .catch(function(){
+          if(btn)btn.disabled=false;
+          if(note){note.textContent='Hoppla — das hat nicht geklappt. Bitte versuch es gleich noch einmal.';note.classList.add('err');}
+        });
+    });
   });
 
   /* ============================================================
      EXIT-INTENT POPUP
-     Mechanic: problem-select -> reward reveal (beehiiv embed auto-loads).
+     Mechanic: problem-select -> reward reveal (native waitlist form).
      ============================================================ */
   var overlay=document.getElementById('exitPopup');
   if(overlay){
@@ -107,15 +121,15 @@
     var x=overlay.querySelector('.close');if(x)x.addEventListener('click',closePopup);
     document.addEventListener('keydown',function(e){if(e.key==='Escape')closePopup();});
 
-    /* problem-select -> reveal reward + auto-load the embed (user has engaged) */
+    /* problem-select -> reveal reward, focus the email field */
     overlay.querySelectorAll('.opt').forEach(function(opt){
       opt.addEventListener('click',function(){
         var pick=opt.getAttribute('data-pick')||'';
         var line=overlay.querySelector('.reward .picked');
         if(line&&pick)line.textContent=pick;
         modal.classList.add('revealed');
-        var emb=overlay.querySelector('.reward .wl-embed');
-        if(emb)setTimeout(function(){if(emb.click)emb.click();},420);
+        var ri=overlay.querySelector('.reward input[type="email"]');
+        if(ri)setTimeout(function(){ri.focus();},420);
       });
     });
     var decline=overlay.querySelector('.decline');
