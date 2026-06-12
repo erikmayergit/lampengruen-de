@@ -19,7 +19,7 @@
 
 <div class="announce">
   <span>Kleine Auflage: <b>30 Lampen pro Monat</b></span><span class="sep">·</span>
-  <span>In 7 Tagen zur ersten Ernte</span><span class="sep">·</span><span><b>90 Tage Garantie</b></span>
+  <span>Vorbestellen: <b>−20 % mit Code VORFREUDE20</b></span><span class="sep">·</span><span><b>90 Tage Garantie</b></span>
 </div>
 
 <header class="nav" id="nav">
@@ -32,7 +32,7 @@
     </nav>
     <div class="nav-cta">
       <a href="/hilfe/" class="btn btn-ghost">Hilfe</a>
-      <a href="#warteliste" class="btn btn-sun js-magnetic">Auf die Warteliste<span class="arr">→</span></a>
+      <a href="#vorbestellen" class="btn btn-sun js-magnetic">Jetzt vorbestellen<span class="arr">→</span></a>
       <button class="menu-btn" id="menuOpen" aria-label="Menü öffnen"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     </div>
   </div>
@@ -47,7 +47,7 @@
     <a href="/produkt/">Produkt</a><a href="/shop/">Shop</a><a href="/vorteile/">Vorteile</a>
     <a href="/story/">Story</a><a href="/blog/">Blog</a><a href="/hilfe/">Hilfe &amp; FAQ</a>
   </nav>
-  <a href="#warteliste" class="btn btn-sun btn-block">Auf die Warteliste</a>
+  <a href="#vorbestellen" class="btn btn-sun btn-block">Jetzt vorbestellen</a>
 </div>
 
 <main>
@@ -81,14 +81,15 @@
         <span>Aus dem Testkreis gelobt</span>
       </div>
       <div class="price-now reveal" data-d="2"><span id="pdpPrice">119&nbsp;€</span> <small>Komplett-Set, inkl. MwSt.</small></div>
+      <div class="code-line reveal" data-d="2">Vorbesteller-Code <button type="button" class="code-chip" id="codeChip">VORFREUDE20</button> = −20&nbsp;% an der Kasse → <b id="pdpPreorderPrice">95,20&nbsp;€</b></div>
       <p class="lead reveal" data-d="2">Eine 3D-gedruckte Glocke aus warmem Amber-PLA über einer Anbauschale. Tagsüber Pendellicht, abends glüht sie golden, und unten wachsen in sieben Tagen frische Microgreens.</p>
 
       <div class="variant reveal" data-d="2">
         <div class="lab">Größe</div>
         <div class="swatches" id="sizeSwatches">
-          <button class="swatch active" data-price="119&nbsp;€" data-who="Solo">Solo · 119&nbsp;€</button>
-          <button class="swatch" data-price="149&nbsp;€" data-who="Duo">Duo · 149&nbsp;€</button>
-          <button class="swatch" data-price="179&nbsp;€" data-who="Familie">Familie · 179&nbsp;€</button>
+          <button class="swatch active" data-size="solo" data-price="119&nbsp;€" data-preorder="95,20&nbsp;€" data-who="Solo">Solo · 119&nbsp;€</button>
+          <button class="swatch" data-size="duo" data-price="149&nbsp;€" data-preorder="119,20&nbsp;€" data-who="Duo">Duo · 149&nbsp;€</button>
+          <button class="swatch" data-size="familie" data-price="179&nbsp;€" data-preorder="143,20&nbsp;€" data-who="Familie">Familie · 179&nbsp;€</button>
         </div>
       </div>
 
@@ -101,10 +102,11 @@
         </div>
       </div>
 
-      <div class="pdp-cta reveal" data-d="3">
-        <a href="#warteliste" class="btn btn-sun js-magnetic btn-block">Auf die Warteliste<span class="arr">→</span></a>
+      <div class="pdp-cta reveal" data-d="3" id="vorbestellen">
+        <a href="#warteliste" class="btn btn-sun js-magnetic btn-block" id="preorderBtn" data-preorder-size="solo">Jetzt vorbestellen · <span id="preorderBtnLabel">Solo 119&nbsp;€</span><span class="arr">→</span></a>
+        <a href="#warteliste" class="btn btn-ghost btn-block">Oder auf die Warteliste</a>
       </div>
-      <p class="reveal" data-d="3" style="margin-top:.9rem;font-size:.85rem;color:var(--ink-soft);display:flex;align-items:center;gap:.5em"><span class="pulse"></span> Kleine Auflage. Du bekommst deinen Bestell-Link, sobald deine Lampe fertig ist.</p>
+      <p class="reveal" data-d="3" style="margin-top:.9rem;font-size:.85rem;color:var(--ink-soft);display:flex;align-items:center;gap:.5em"><span class="pulse"></span> Code <b>VORFREUDE20</b> an der Kasse einlösen: 20&nbsp;% Rabatt. Wir produzieren 30 Lampen pro Monat, geliefert wird in Bestell-Reihenfolge.</p>
 
       <div class="pdp-incl reveal" data-d="3">
         <h4>Im Komplett-Set enthalten</h4>
@@ -159,7 +161,7 @@
   <div class="wrap">
     <span class="kicker on-dark reveal center-k">30 Lampen pro Monat</span>
     <h2 class="reveal" data-d="1">Sichere dir <span class="gold">deine Lampe.</span></h2>
-    <p class="reveal" data-d="2">Trag dich ein, und sobald eine Lampe für dich fertig ist, bekommst du deinen persönlichen Bestell-Link.</p>
+    <p class="reveal" data-d="2">Noch nicht so weit? Trag dich ein, und wir melden uns, sobald deine Lampe drankommt.</p>
     <form class="wl-form reveal js-wl" data-d="2" novalidate>
       <input type="email" placeholder="deine@email.de" autocomplete="email" aria-label="E-Mail-Adresse" />
       <button type="submit" class="btn btn-sun js-magnetic">Eintragen<span class="arr">→</span></button>
@@ -174,7 +176,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand"><a class="brand" href="/"><img src="/assets/logo-320.png" alt="" />Lampengrün</a><div class="tag">Frisches Grün aus deiner Lampe.</div></div>
-      <div class="foot-col"><h5>Produkt</h5><a href="/produkt/">Die Lampe</a><a href="/shop/">Shop &amp; Größen</a><a href="/vorteile/">Vorteile</a><a href="#warteliste">Warteliste</a></div>
+      <div class="foot-col"><h5>Produkt</h5><a href="/produkt/">Die Lampe</a><a href="#vorbestellen">Vorbestellen</a><a href="/shop/">Shop &amp; Größen</a><a href="/vorteile/">Vorteile</a><a href="#warteliste">Warteliste</a></div>
       <div class="foot-col"><h5>Marke</h5><a href="/story/">Story</a><a href="/blog/">Blog</a><a href="/hilfe/">Hilfe &amp; FAQ</a><a href="/hilfe/#kontakt">Kontakt</a></div>
       <div class="foot-col"><h5>Mitmachen</h5><a href="/freunde-werben/">Freunde werben</a><a href="/hilfe/">Botschafter</a><a href="/hilfe/">Affiliate</a><a href="#warteliste">Newsletter</a></div>
     </div>
@@ -183,8 +185,8 @@
 </footer>
 
 <div class="sticky-cta" id="stickyCta">
-  <div class="px" id="stickyPrice">ab 119&nbsp;€ <small>Komplett-Set, 90 Tage Garantie</small></div>
-  <a href="#warteliste" class="btn btn-sun">Warteliste</a>
+  <div class="px" id="stickyPrice">Solo 119&nbsp;€ <small>−20 % mit Code VORFREUDE20</small></div>
+  <a href="#vorbestellen" class="btn btn-sun">Vorbestellen</a>
 </div>
 
 <!-- EXIT POPUP -->
@@ -228,15 +230,46 @@
       b.classList.add('active');main.src=b.getAttribute('data-src');
     });
   });
-  var price=document.getElementById('pdpPrice'),sticky=document.getElementById('stickyPrice');
+  var price=document.getElementById('pdpPrice'),poPrice=document.getElementById('pdpPreorderPrice'),
+      sticky=document.getElementById('stickyPrice'),
+      poBtn=document.getElementById('preorderBtn'),poLabel=document.getElementById('preorderBtnLabel');
+  function applySize(s){
+    document.querySelectorAll('#sizeSwatches .swatch').forEach(function(x){x.classList.remove('active');});
+    s.classList.add('active');
+    var p=s.getAttribute('data-price'),v=s.getAttribute('data-preorder'),
+        who=s.getAttribute('data-who'),key=s.getAttribute('data-size');
+    price.innerHTML=p;
+    if(poPrice)poPrice.innerHTML=v;
+    if(poLabel)poLabel.innerHTML=who+' '+p;
+    if(poBtn){
+      poBtn.setAttribute('data-preorder-size',key);
+      var url=(window.LG_STRIPE||{})[key];
+      /* placeholder link -> button falls back to the waitlist anchor */
+      poBtn.href=(url&&/^https:/.test(url))?url:'#warteliste';
+    }
+    if(sticky)sticky.innerHTML=who+' '+p+' <small>−20 % mit Code VORFREUDE20</small>';
+  }
   document.querySelectorAll('#sizeSwatches .swatch').forEach(function(s){
-    s.addEventListener('click',function(){
-      document.querySelectorAll('#sizeSwatches .swatch').forEach(function(x){x.classList.remove('active');});
-      s.classList.add('active');
-      var p=s.getAttribute('data-price');price.innerHTML=p;
-      if(sticky)sticky.innerHTML=s.getAttribute('data-who')+' '+p+' <small>Komplett-Set, 90 Tage Garantie</small>';
-    });
+    s.addEventListener('click',function(){applySize(s);});
   });
+  /* deep link from pricing cards: /produkt/?groesse=duo#vorbestellen */
+  var pre=(location.search.match(/[?&]groesse=(solo|duo|familie)/)||[])[1];
+  var preEl=pre&&document.querySelector('#sizeSwatches .swatch[data-size="'+pre+'"]');
+  applySize(preEl||document.querySelector('#sizeSwatches .swatch.active'));
+  /* code chip: click to copy */
+  var chip=document.getElementById('codeChip');
+  if(chip){
+    var codeTxt=chip.textContent;
+    chip.addEventListener('click',function(){
+      function done(){
+        chip.classList.add('copied');chip.textContent='Kopiert ✓';
+        setTimeout(function(){chip.classList.remove('copied');chip.textContent=codeTxt;},1400);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(codeTxt).then(done,function(){});
+      }
+    });
+  }
   document.querySelectorAll('#colorSwatches .swatch').forEach(function(s){
     s.addEventListener('click',function(){
       document.querySelectorAll('#colorSwatches .swatch').forEach(function(x){x.classList.remove('active');});

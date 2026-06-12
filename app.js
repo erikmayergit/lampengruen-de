@@ -46,6 +46,28 @@
     },{passive:true});
   }
 
+  /* ---- pre-order -> Stripe Payment Links (LIVE, wired 2026-06-12) ----
+     3 Stripe products Solo/Duo/Familie at LIST price (119/149/179 EUR),
+     promotion codes ON, Farbe as custom field. The discount happens at
+     checkout via codes the customer applies: public Vorbesteller code
+     VORFREUDE20 (−20%, Erik decision 2026-06-12) + Botschafter founder
+     code (−50% of list, max_redemptions 10). ⚠️ The codes must exist in
+     Stripe (Product catalog -> Coupons -> promotion code) with EXACTLY the
+     string shown on the site. Renaming = find-replace VORFREUDE20 in
+     index.html, produkt/index.html, shop/index.html.
+     If a value here is ever not a real https link, pre-order buttons keep
+     their waitlist fallback href, so a click never dead-ends. ---- */
+  var STRIPE_LINKS={
+    solo:'https://buy.stripe.com/9B6fZhc2J1VidpkdYc3ks04',
+    duo:'https://buy.stripe.com/5kQbJ12s98jG0Cy5rG3ks05',
+    familie:'https://buy.stripe.com/6oU8wPc2JfM8fxs5rG3ks06'
+  };
+  window.LG_STRIPE=STRIPE_LINKS;
+  document.querySelectorAll('[data-preorder-size]').forEach(function(a){
+    var url=STRIPE_LINKS[a.getAttribute('data-preorder-size')];
+    if(url&&/^https:/.test(url))a.href=url;
+  });
+
   /* ---- waitlist forms -> native submit to Supabase Edge Function (beehiiv) ----
      The site's own styled form posts the email to our EU edge function, which
      subscribes via the beehiiv API server-side. No beehiiv iframe, no Turnstile;

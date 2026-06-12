@@ -552,3 +552,18 @@ footer.site{background:var(--cream-50);padding-block:clamp(48px,7vw,72px) 32px;b
   html{scroll-behavior:auto}
   .modal,.modal-overlay,.mobile-menu,.sticky-cta{transition:opacity .2s linear}
 }
+
+/* ============ PRE-ORDER (Vorbesteller) ============ */
+.amt-was{font-size:.85rem;color:var(--ink-soft);margin-top:4px}
+.amt-was s{text-decoration-color:var(--ember-600);text-decoration-thickness:1.5px}
+.off-pill{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3a2708;background:var(--sun-300);padding:.3em .8em;border-radius:999px;white-space:nowrap;align-self:center}
+.price-now .old{font-size:1.15rem;color:var(--ink-soft);font-family:var(--sans);text-decoration:line-through;text-decoration-color:var(--ember-600)}
+.pdp-cta .btn+.btn{margin-top:10px}
+.wl-alt{margin-top:1.4rem;font-size:.95rem;color:rgba(244,239,226,.85)}
+.wl-alt a{color:var(--sun-300);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.wl-alt a:hover{color:var(--sun-400)}
+.code-line{margin-top:.9rem;font-size:.95rem;color:var(--ink-soft);display:flex;align-items:center;gap:.5em;flex-wrap:wrap}
+.code-line b{color:var(--ink)}
+.code-chip{font-family:var(--sans);font-size:.9rem;font-weight:700;letter-spacing:.05em;color:var(--ink);background:var(--cream-50);border:1.5px dashed var(--life-700);border-radius:10px;padding:.3em .7em;cursor:copy;transition:border-color .3s,background .3s}
+.code-chip:hover{background:#fff}
+.code-chip.copied{border-style:solid;background:#eaf6e2}
