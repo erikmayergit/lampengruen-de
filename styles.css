@@ -567,3 +567,11 @@ footer.site{background:var(--cream-50);padding-block:clamp(48px,7vw,72px) 32px;b
 .code-chip{font-family:var(--sans);font-size:.9rem;font-weight:700;letter-spacing:.05em;color:var(--ink);background:var(--cream-50);border:1.5px dashed var(--life-700);border-radius:10px;padding:.3em .7em;cursor:copy;transition:border-color .3s,background .3s}
 .code-chip:hover{background:#fff}
 .code-chip.copied{border-style:solid;background:#eaf6e2}
+
+/* Cookie-Consent-Banner (GA4 nur nach Einwilligung — DSGVO) */
+.cc-banner{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:9999;max-width:920px;margin-inline:auto;background:var(--night-900);color:#fff;border-radius:16px;padding:1.1rem 1.5rem;box-shadow:0 12px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;gap:1rem;font-size:.92rem;line-height:1.55}
+.cc-banner a{color:var(--sun-300);text-decoration:underline}
+.cc-copy{flex:1}
+.cc-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.cc-actions .btn{flex:1;min-width:120px;justify-content:center}
+@media(min-width:640px){.cc-banner{flex-direction:row;align-items:center;gap:1.5rem}.cc-actions{flex:0 0 auto}}

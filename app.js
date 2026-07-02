@@ -158,3 +158,32 @@
     if(decline)decline.addEventListener('click',closePopup);
   }
 })();
+
+/* Cookie-Consent + GA4 — loads Google Analytics ONLY after explicit opt-in
+   (prior-consent model, DSGVO). No Google request fires before "Akzeptieren". */
+(function(){
+  var GA_ID='G-HG7CW0QYRL', KEY='lg-consent';
+  function loadGA(){
+    if(window.__lgGA)return; window.__lgGA=true;
+    var s=document.createElement('script'); s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag=gtag; gtag('js',new Date()); gtag('config',GA_ID,{anonymize_ip:true});
+  }
+  var choice=null; try{choice=localStorage.getItem(KEY);}catch(e){}
+  if(choice==='granted'){loadGA();return;}
+  if(choice==='denied'){return;}
+  var b=document.createElement('div');
+  b.className='cc-banner'; b.setAttribute('role','dialog'); b.setAttribute('aria-label','Cookie-Einwilligung');
+  b.innerHTML='<div class="cc-copy">🍪 Cookie-Hinweis — der einzig ungesunde Teil unserer Seite. Wir züchten frisches Grün, keine Naschereien, aber ein paar anonyme Statistik-Cookies (Google Analytics) helfen uns besser zu werden. Null Kalorien, versprochen. Mehr in der <a href="/datenschutz/">Datenschutzerklärung</a>.</div>'+
+    '<div class="cc-actions"><button type="button" class="btn btn-ghost on-dark cc-no">Ablehnen</button><button type="button" class="btn btn-sun cc-yes">Akzeptieren</button></div>';
+  function done(v){ try{localStorage.setItem(KEY,v);}catch(e){} if(b&&b.parentNode)b.parentNode.removeChild(b); }
+  function mount(){
+    document.body.appendChild(b);
+    b.querySelector('.cc-yes').addEventListener('click',function(){done('granted');loadGA();});
+    b.querySelector('.cc-no').addEventListener('click',function(){done('denied');});
+  }
+  if(document.body)mount(); else document.addEventListener('DOMContentLoaded',mount);
+})();
